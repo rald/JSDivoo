@@ -1,0 +1,19 @@
+#color {
+	border: none;
+	outline: none;
+	background: none;
+	width: 64px;
+	height: 64px;
+}
+
+.text {
+	font-family: monospace;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.button {
+	border: none;
+	outline: none;
+	background: none;
+}
