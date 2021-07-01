@@ -29,8 +29,14 @@ var css="#C0C0C0";
 
 var playing=false;
 
-canvas.width=512;
-canvas.height=512;
+canvas.width=256;
+canvas.height=256;
+
+var boxCols=16;
+var boxRows=16;
+
+var boxWidth=canvas.width/boxCols;
+var boxHeight=canvas.height/boxRows;
 
 ctx.fillStyle="#000000";
 ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -38,11 +44,10 @@ ctx.fillRect(0,0,canvas.width,canvas.height);
 color.value=cfs;
 hex.value=cfs;
 
-
 var frame=0;
 var bitmap=[];
 var arr=[];
-for(var i=0;i<256;i++) {
+for(var i=0;i<boxCols*boxRows;i++) {
 	arr.push("#000000");
 }
 bitmap.push(arr);
@@ -60,9 +65,9 @@ function box(x,y,w,h,fs,ss) {
 }
 
 function update(f) {
-	for(var j=0;j<16;j++) {
-		for(var i=0;i<16;i++) {
-			box(i*32,j*32,32,32,bitmap[f][i+j*16],css);
+	for(var j=0;j<boxRows;j++) {
+		for(var i=0;i<boxCols;i++) {
+			box(i*boxWidth,j*boxHeight,boxWidth,boxHeight,bitmap[f][i+j*16],css);
 		}
 	}
 	frame=f;
@@ -104,7 +109,7 @@ prev.addEventListener("click",function(e) {
 	} else {
 		if(confirm("Add frame at the beginning?")) {
 			var arr=[];
-			for (var i = 0; i < 256; i++) {
+			for (var i = 0; i < boxCols*boxRows; i++) {
 				arr.push("#000000");
 			}
 			bitmap.unshift(arr);
@@ -123,7 +128,7 @@ next.addEventListener("click",function(e) {
 	} else {
 		if (confirm("Add a new frame at end?")) {
 			var arr = [];
-			for (var i = 0; i < 256; i++) {
+			for (var i = 0; i < boxCols*boxRows; i++) {
 				arr.push("#000000");
 			}
 			bitmap.push(arr);
@@ -154,7 +159,7 @@ add.addEventListener("click",function(e) {
 	
 	if(confirm("Insert a frame before frame "+frame+"?")) {
 		var arr=[];
-		for (var i = 0; i < 256; i++) {
+		for (var i = 0; i < boxCols*boxRows; i++) {
 			arr.push("#000000");
 		}
 		insert(bitmap,frame,arr);
@@ -237,10 +242,10 @@ function animate() {
 
 function draw() {
 	if(drawing) {
-		var i=Math.floor(mousePos.x/32);
-		var j=Math.floor(mousePos.y/32);
-		bitmap[frame][i+j*16]=cfs;
-		box(i*32,j*32,32,32,cfs,css);
+		var i=Math.floor(mousePos.x/boxWidth);
+		var j=Math.floor(mousePos.y/boxHeight);
+		bitmap[frame][i+j*boxCols]=cfs;
+		box(i*boxWidth,j*boxHeight,boxWidth,boxHeight,cfs,css);
 	}
 	
 	
