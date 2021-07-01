@@ -203,7 +203,7 @@ var controls=document.getElementsByClassName("controls");
 for(var i=0;i<controls.length;i++) {
 	controls[i].addEventListener("click",function(e) {
 		if(playing) {
-			alert("Animation is playing. You mus pause it first.");
+			alert("Animation is playing. You must pause it first.");
 		}
 	});
 }
