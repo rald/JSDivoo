@@ -22,12 +22,17 @@ var btnSave=document.getElementById("btnSave");
 
 var saveArea=document.getElementById("saveArea");
 
+var btnEyedrop=document.getElementById("btnEyedrop");
+
+
 var ctx=canvas.getContext("2d");
 
 var cfs="#ffffff";
 var css="#C0C0C0";
 
 var playing=false;
+var eyedropping=false;
+var hold=false;
 
 canvas.width=256;
 canvas.height=256;
@@ -147,25 +152,18 @@ add.addEventListener("click",function(e) {
 	update(frame);
 });
 
-btnPlay.addEventListener("click",function(e) {
-	playing=true;
+function disableControls() {
+		var controls = document.getElementsByClassName("controls");
 	
-	var controls = document.getElementsByClassName("controls");
-	
-	for (var i = 0; i < controls.length; i++) {
-		var nodes=controls[i].getElementsByTagName("*");
-		for(var j=0;j<nodes.length;j++) {
-			nodes[j].disabled = true;
+		for (var i = 0; i < controls.length; i++) {
+			var nodes = controls[i].getElementsByTagName("*");
+			for (var j = 0; j < nodes.length; j++) {
+				nodes[j].disabled = true;
+			}
 		}
-	}
-	
-	clearInterval(animationInterval);
-	animationInterval=setInterval(animate,500);
-});
+}
 
-btnPause.addEventListener("click",function(e) {
-	playing=false;
-		
+function enableControls() {
 	var controls = document.getElementsByClassName("controls");
 	for (var i = 0; i < controls.length; i++) {
 		var nodes=controls[i].getElementsByTagName("*");
@@ -173,6 +171,31 @@ btnPause.addEventListener("click",function(e) {
 			nodes[j].disabled = false;
 		}
 	}
+}
+
+btnPlay.addEventListener("click",function(e) {
+	
+	if(eyedropping) return false;
+	
+	playing=true;
+	
+	btnPlay.style.border="1px solid black";
+	
+	disableControls();
+	
+	clearInterval(animationInterval);
+	animationInterval=setInterval(animate,500);
+});
+
+btnPause.addEventListener("click",function(e) {
+	
+	if(eyedropping) return false;
+	
+	playing=false;
+	
+	btnPlay.style.border="1px solid transparent";
+		
+	enableControls();
 
 	clearInterval(animationInterval);
 	animationInterval=setInterval(draw,1000/60);
@@ -181,16 +204,6 @@ btnPause.addEventListener("click",function(e) {
 frameNumber.addEventListener("change",function(e) {
 	update(frameNumber.value);
 });
-
-
-var controls=document.getElementsByClassName("controls");
-for(var i=0;i<controls.length;i++) {
-	controls[i].addEventListener("click",function(e) {
-		if(playing) {
-			alert("Animation is playing. You must pause it first.");
-		}
-	});
-}
 
 btnSave.addEventListener("click",function(e) {
 	saveArea.value=JSON.stringify(bitmap);
@@ -205,6 +218,31 @@ btnLoad.addEventListener("click", function(e) {
 	update(0);
 });
 
+btnEyedrop.addEventListener("click", function(e) {
+	
+	if(playing) return false;
+
+	if(eyedropping) {
+			enableControls();
+		
+			clearInterval(animationInterval);
+			animationInterval = setInterval(draw, 1000 / 60);
+		
+			btnEyedrop.style.border = "1px solid transparent";
+		
+			eyedropping = false;
+		return false;
+	}
+
+	eyedropping=true;
+
+	btnEyedrop.style.border="1px solid black";
+
+	disableControls();
+	
+	clearInterval(animationInterval);
+	animationInterval = setInterval(eyedropColor, 1000/60);
+});
 
 function animate() {
 	if (frame < bitmap.length-1) {
@@ -215,6 +253,22 @@ function animate() {
 	update(frame);
 }
 
+function eyedropColor() {
+		if (isMouseDown) {
+			var i = Math.floor(mousePos.x / boxWidth);
+			var j = Math.floor(mousePos.y / boxHeight);
+			cfs = bitmap[frame][i + j * boxCols];
+			color.value = cfs;
+			enableControls();
+			
+			clearInterval(animationInterval);
+			animationInterval = setInterval(draw, 1000 / 60);		
+			
+			btnEyedrop.style.border="1px solid transparent";
+
+			eyedropping = false;
+		}	
+}
 
 function draw() {
 	if(drawing) {
@@ -222,7 +276,7 @@ function draw() {
 		var j=Math.floor(mousePos.y/boxHeight);
 		bitmap[frame][i+j*boxCols]=cfs;
 		box(i*boxWidth,j*boxHeight,boxWidth,boxHeight,cfs,css);
-	}
+	} 
 }
 
 update(0);

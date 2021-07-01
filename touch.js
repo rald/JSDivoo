@@ -2,14 +2,17 @@
 var drawing = false;
 var mousePos = { x:0, y:0 };
 var lastPos = mousePos;
+var isMouseDown=false;
 
 canvas.addEventListener("mousedown", function (e) {
 	drawing = true;
+	isMouseDown=true;
 	lastPos = getMousePos(canvas, e);
 }, false);
 
 canvas.addEventListener("mouseup", function (e) {
 	drawing = false;
+	isMouseDown=false;
 }, false);
 
 canvas.addEventListener("mousemove", function (e) {

@@ -26,3 +26,11 @@ body {
 	width: 32px;
 	hoght: 32px;
 }
+
+#btnPlay {
+	border: 1px solid transparent;
+}
+
+#btnEyedrop {
+	border: 1px solid transparent;
+}
