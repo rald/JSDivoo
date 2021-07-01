@@ -18,8 +18,6 @@ var btnPlay=document.getElementById("btnPlay");
 
 var btnPause=document.getElementById("btnPause");
 
-var controls=document.getElementById("controls");
-
 var btnSave=document.getElementById("btnSave");
 
 var saveArea=document.getElementById("saveArea");
@@ -27,7 +25,7 @@ var saveArea=document.getElementById("saveArea");
 var ctx=canvas.getContext("2d");
 
 var cfs="#ffffff";
-var css="#ffffff";
+var css="#C0C0C0";
 
 var playing=false;
 
@@ -37,8 +35,8 @@ canvas.height=512;
 ctx.fillStyle="#000000";
 ctx.fillRect(0,0,canvas.width,canvas.height);
 
-color.value=css;
-hex.value=css;
+color.value=cfs;
+hex.value=cfs;
 
 
 var frame=0;
@@ -64,7 +62,7 @@ function box(x,y,w,h,fs,ss) {
 function update(f) {
 	for(var j=0;j<16;j++) {
 		for(var i=0;i<16;i++) {
-			box(i*32,j*32,32,32,bitmap[f][i+j*16],"#ffffff");
+			box(i*32,j*32,32,32,bitmap[f][i+j*16],css);
 		}
 	}
 	frame=f;
@@ -104,7 +102,7 @@ prev.addEventListener("click",function(e) {
 		frame--;
 		update(frame);
 	} else {
-		if(confirm("Add frame at the beginning")) {
+		if(confirm("Add frame at the beginning?")) {
 			var arr=[];
 			for (var i = 0; i < 256; i++) {
 				arr.push("#000000");
@@ -123,7 +121,7 @@ next.addEventListener("click",function(e) {
 		frame++;
 		update(frame);
 	} else {
-		if (confirm("Add a new frame")) {
+		if (confirm("Add a new frame at end?")) {
 			var arr = [];
 			for (var i = 0; i < 256; i++) {
 				arr.push("#000000");
@@ -139,7 +137,7 @@ minus.addEventListener("click",function(e) {
 	
 
 	if(bitmap.length>1) {
-		if(confirm("Remove frame "+frame)) {
+		if(confirm("Remove frame "+frame+"?")) {
 			remove(bitmap,frame);
 			if(frame>bitmap.length-1) {
 				frame=bitmap.length-1;
@@ -154,7 +152,7 @@ minus.addEventListener("click",function(e) {
 add.addEventListener("click",function(e) {
 	
 	
-	if(confirm("Insert a frame before frame "+frame)) {
+	if(confirm("Insert a frame before frame "+frame+"?")) {
 		var arr=[];
 		for (var i = 0; i < 256; i++) {
 			arr.push("#000000");
@@ -168,11 +166,14 @@ add.addEventListener("click",function(e) {
 btnPlay.addEventListener("click",function(e) {
 		playing=true;
 		
-		var nodes = document.getElementById("controls").getElementsByTagName('*');
-		for (var i = 0; i < nodes.length; i++) {
-			nodes[i].disabled = true;
-		}
+		var controls = document.getElementsByClassName("controls");
 		
+		for (var i = 0; i < controls.length; i++) {
+			var nodes=controls[i].getElementsByTagName("*");
+			for(var j=0;j<nodes.length;j++) {
+				nodes[j].disabled = true;
+			}
+		}
 		
 		clearInterval(animationInterval);
 		animationInterval=setInterval(animate,500);
@@ -181,10 +182,13 @@ btnPlay.addEventListener("click",function(e) {
 btnPause.addEventListener("click",function(e) {
 		playing=false;
 			
-		var nodes = document.getElementById("controls").getElementsByTagName('*');
-		for (var i = 0; i < nodes.length; i++) {
-			nodes[i].disabled = false;
-		}	
+		var controls = document.getElementsByClassName("controls");
+		for (var i = 0; i < controls.length; i++) {
+			var nodes=controls[i].getElementsByTagName("*");
+			for(var j=0;j<nodes.length;j++) {
+				nodes[j].disabled = false;
+			}
+		}
 	
 		clearInterval(animationInterval);
 		animationInterval=setInterval(draw,1000/60);
@@ -194,11 +198,15 @@ frameNumber.addEventListener("change",function(e) {
 	update(frameNumber.value);
 });
 
-controls.addEventListener("click",function(e) {
-	if(playing) {
-		alert("Animation is playing. You mus pause it first.");
-	}
-});
+
+var controls=document.getElementsByClassName("controls");
+for(var i=0;i<controls.length;i++) {
+	controls[i].addEventListener("click",function(e) {
+		if(playing) {
+			alert("Animation is playing. You mus pause it first.");
+		}
+	});
+}
 
 btnSave.addEventListener("click",function(e) {
 	
