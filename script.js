@@ -226,7 +226,7 @@ btnLoad.addEventListener("click", function(e) {
 
 
 function animate() {
-		if (frame < bitmap.length) {
+		if (frame < bitmap.length-1) {
 			frame++;
 		} else {
 			frame = 0;
