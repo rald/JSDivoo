@@ -11,7 +11,7 @@
 			<br>
 			<table>
 			<tr>
-				<td colspan="7" align="center">
+				<td colspan="5" align="center">
 					<span class="controls">
 						<input id="frameNumber" class="text" type="text" size="7" maxlength="7">
 					</span>
@@ -19,66 +19,80 @@
 			</tr>
 			<tr>
 				<td>
-					<button id="btnPlay" class="button">
-						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABDklEQVR4Ae2awRLCIBBDi+P//zKeSZkpHXYrJc9bKlZ4m6QHPQ5eEIAABCAAAQi4EigJB68375mxh+EtfIZXbroQAJsOdvhYEflrMl9rIy83UsppC6cLlzeZWEAEJuBt8VF7B0TkrQn93Q5QGz3dCfYOAIBa0E0v1wE6gOxOIAJK3E3bO2D5DlBHRneCvQMAoBZz06/rAB3QbCcQASXqpnGA28T1vDhAibhpewd83zbx2ee+ntfeAQBQS7jp5TsgOvM6YCKgRNy0vQOW64DszKvD7R0AALWEm/57BzydeR0wEVAibtreARG/C6hpmv8M6ZsdnbGHztf0L9k7AAB9Y3AVAhCAAAQgAAEI7E/gB35aFnKCeC/nAAAAAElFTkSuQmCC" alt="" />
-					</button>
-				</td>
-				<span class="controls">
-				<td>
-					<button id="prev" class="button">
+					<span class="controls">
+						<button id="prev" class="button">
 						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAA+0lEQVR4Ae3W0Q7CIAyFYTC+/yvjjSHpVkRcZUnP79WEOcu3U7ZS+CCAAAIIIIAAAggggAACCCCAgJpAvWHBbfKfW2t6TIpJPw1A+ls8WeBzMh8xbXq+NfO11Lq15U/roQVOJGID8gn4xx5gmvzY818EzPzeOT9005BPAABOxKSGIvrJ9OwPPb8E7rw3XFoDLbDEn/BkEpDwpi4tiQQscSU8WT4Bl56hg0AsvRc4z/XBZftwaM3yCQCgB0v0ILSfBoYf9wRnD9hRUy+VFugUogfyCdjab++QmT3BCd7WmuQTAIATQYYQQAABBBBAAAEEEEAAAQQQQACB1AIv0uEXOyqjO5sAAAAASUVORK5CYII=" alt="" />
 					</button>
+					</span>
 				</td>
 				<td>
+					<span class="controls">
 					<button id="minus" class="button">
 						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAqklEQVR4Ae3WUQqAIBAFQO3+d7ZvEYVcIXCnvxStN+5SpbgIECBAgAABAgQIECBAgAABAgQIECBAgACBLAL1QNB2YI/IFqEMT+TJN6wFcMMpRjLs9E/X8611t5F32Vpb6xBhGFhtrAVWOhnmVECGU15lVAErnQxz6Svg0zdzUhH//giUEsqQvgIATMraMAECBAgQIECAAAECBAgQIECAAAECBAgQIEDgOoEXR2EGHicNIbwAAAAASUVORK5CYII=" alt="" />
 					</button>
+					</span>
 				</td>
 				<td>
+					<span class="controls">
+				
 					<input id="color" type="color">
+					</span>
 				</td>
 				<td>
+					<span class="controls">
+				
 					<button id="add" class="button">
 						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABDUlEQVR4Ae2Y0RqDIAhGc1/v/8ruWrThIpyD052WCIefpI6DCwIQgAAEIAABCEAAAhDISKD8IOiq7LnUp5fiTPjbAAifYiXAFfXW1HytzbBzr5TOpW6iW2SYoAQM8EIsRQEh0mgIAgUY4IVYml4B5wNp/Hyw2zfQ7Jv6hPQKAIBdof9t4U79NDWp9fbeeKzfDpSAd4Z2t48Cds+Qt38owJvw7vbTK+BOHyCT2vQF8qYca33D4FyXJuTYFEN6BQBA6inb+In/AVoNfvWOGCRAsz9YMj9FCcyzivkkCoiZ1/moUMA8q5hPpleA6xl7oRmtL1jqU3oFAOBCpkxDAAIQgAAEIAABCEAAAhAITeANOJIRUGU6Xn8AAAAASUVORK5CYII=" alt="" />
 					</button>
+					</span>
 				</td>
 				<td>
+					<span class="controls">
+				
 					<button id="next" class="button">
 						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAA+klEQVR4Ae2WwQ6EIAxEYbP//8u4By8dExsDZYU+bxWQ9jFTKYUHAhCAAAQgAAEIQAACEIAABCAAgWwE6h8Kbs6eU3P6OMlsPwyA7Y/YKXCq385cTA9ozYSl1ktKlxdOTY+GscAjXBtOTq+ACH9ZUzuq0R6g06N7QnoFAEAlly0e0QOM5z1P9wIe3ROwQO+JrL4eBax+gr35o4BegquvT6+AEfcAFYG5F+igxt69YfR/X/dPrwAAqCSyxd+Agr2+ctsjoj2v9WIBJZItTq8Az68RgrjtAb8Np+aUXgEAiNA434QABCAAAQhAAAIQgAAEIAABCEAAAm8mcACqUBNBtuZCwQAAAABJRU5ErkJggg==" alt="" />
 					</button>
+					</span>
 				</td>
 				</span>
-				<td>
-					<button id="btnPause" class="button">
-						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAA4klEQVR4Ae2aMQ6EMBDECP//c2g3k0hApFT2VRl0sBqv6bgufxKQgAQkIAEJUAm0jeL95z07M+qIo/PuOol4FgBx67Xzl/dzeAd7H2J91vLc2jRiuhA3DgNOz/MVCPq4qAG4lUdhDQgguKgBuJVHYQ0IILioAbiVR2ENCCC4qAG4lUdhDQgguKgBuJVHYQ0IILioAbiVR2ENCCC4qAG4lUdhDQgguKgBuJVHYQ0IILioAbiVR2ENCCC4iDfg7Zu9lRHDd3yrP8S1nRn1EUfn4Q0QQHXNswQkIAEJSEACEiAReABmVwxesGwbcAAAAABJRU5ErkJggg==" alt="" />
-					</button>
-				</td>
 			</tr>
 			<tr>
-				<td colspan="7" align="center">
+				<td colspan="5" align="center">
 					<span class="controls">
 						<input id="hex" class="text" type="text" size="7" maxlength="7">
 					</span>
 				</td>
 			</tr>
 			<tr>
-				<span class="controls">
-					<td colspan="3" align="center">
+				<td align="center">
+					<span class="controls">
 						<button id="btnSave" class="button">
 							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABKElEQVR4Ae2ZQRICIQwEF8v/fxk9eCFYpnYDyGbaG1BA0pkB1OPgAwEIKBMof0i+OnsujenhBJN+GADpS+wkuMJvjedrbZpdeKV0IXUd3aRABxYIwEsxFQWkKGMgCRQQgJdiqrwCngPK+Ptij2/grR96J8grAABxhd57hZB/Pqk3HvXe+lFco78rYIFoRe4+X14BI84AK4KhZ8Joz9tg5RUAACsJtfaMM8AyPHUmzPa8DQ4LWCJqbXkFrDgDrKiaM8EOvttLY5JXAAC+SJAuCEAAAjIERty53r0+G2YoB67B2eXZfX15BVzxT+P52f8DeAqK/n4grwAAeBLLPo4CslfYyw8FeISyj4ffARsCOpUTFtiwgktDklfAUtpsBgEIQAACEIDAVgReInkaWaCx0aYAAAAASUVORK5CYII=" alt="" />
 						</button>
-					</td>
-				<td></td>
-				<td colspan="3" align="center">
-					<button id="btnLoad" class="button">
-						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABLUlEQVR4Ae2ZwQ6DIBBEtfH/f9lemhCCZqKwdMM8Twph2X3MAGm3jQcCEHAmsP+h+FPMOTWnj0hm+W4ALL/EosAZfqs8f57VZ5PevjcpNQ3NoI4GLNABb4mh9gqI8FdlcuV5JaPoPcFeAQBQEly9f8QeMNTzCvjoPQELKOKr99srYPgeoBSj7gUXHlchu2qwVwAAlL5W7z8GFKg8WN0TXsyn4r8IWYZggcLC8w0FeK57qRoFFBaeb/YKCD1jbzSl7gVTc7JXAABuZEozBCAAAQsCI85cda5Hg+yqgWMwenmyx7dXwBv/VJ5Xv/NHK+Dif4RHNdkrAADREs0eHwVkX6Ho/FBANOHs8R+dmb9iqntAwgIf1YQFEq7g1JTsFTCVNpNBAAIQgAAEIJCKwBcgKBlbDqtXmwAAAABJRU5ErkJggg==" alt="" />
+					</span>
+				</td>
+				<td>
+					<button id="btnPlay" class="button">
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABDklEQVR4Ae2awRLCIBBDi+P//zKeSZkpHXYrJc9bKlZ4m6QHPQ5eEIAABCAAAQi4EigJB68375mxh+EtfIZXbroQAJsOdvhYEflrMl9rIy83UsppC6cLlzeZWEAEJuBt8VF7B0TkrQn93Q5QGz3dCfYOAIBa0E0v1wE6gOxOIAJK3E3bO2D5DlBHRneCvQMAoBZz06/rAB3QbCcQASXqpnGA28T1vDhAibhpewd83zbx2ee+ntfeAQBQS7jp5TsgOvM6YCKgRNy0vQOW64DszKvD7R0AALWEm/57BzydeR0wEVAibtreARG/C6hpmv8M6ZsdnbGHztf0L9k7AAB9Y3AVAhCAAAQgAAEI7E/gB35aFnKCeC/nAAAAAElFTkSuQmCC" alt="" />
 					</button>
 				</td>
+				<td></td>
+				<td>
+					<button id="btnPause" class="button">
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAA4klEQVR4Ae2aMQ6EMBDECP//c2g3k0hApFT2VRl0sBqv6bgufxKQgAQkIAEJUAm0jeL95z07M+qIo/PuOol4FgBx67Xzl/dzeAd7H2J91vLc2jRiuhA3DgNOz/MVCPq4qAG4lUdhDQgguKgBuJVHYQ0IILioAbiVR2ENCCC4qAG4lUdhDQgguKgBuJVHYQ0IILioAbiVR2ENCCC4qAG4lUdhDQgguKgBuJVHYQ0IILioAbiVR2ENCCC4iDfg7Zu9lRHDd3yrP8S1nRn1EUfn4Q0QQHXNswQkIAEJSEACEiAReABmVwxesGwbcAAAAABJRU5ErkJggg==" alt="" />
+						</button>
+				</td>
+				<td>
+					<span class="controls">
+						<button id="btnLoad" class="button">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABLUlEQVR4Ae2ZwQ6DIBBEtfH/f9lemhCCZqKwdMM8Twph2X3MAGm3jQcCEHAmsP+h+FPMOTWnj0hm+W4ALL/EosAZfqs8f57VZ5PevjcpNQ3NoI4GLNABb4mh9gqI8FdlcuV5JaPoPcFeAQBQEly9f8QeMNTzCvjoPQELKOKr99srYPgeoBSj7gUXHlchu2qwVwAAlL5W7z8GFKg8WN0TXsyn4r8IWYZggcLC8w0FeK57qRoFFBaeb/YKCD1jbzSl7gVTc7JXAABuZEozBCAAAQsCI85cda5Hg+yqgWMwenmyx7dXwBv/VJ5Xv/NHK+Dif4RHNdkrAADREs0eHwVkX6Ho/FBANOHs8R+dmb9iqntAwgIf1YQFEq7g1JTsFTCVNpNBAAIQgAAEIJCKwBcgKBlbDqtXmwAAAABJRU5ErkJggg==" alt="" />
+						</button>
+					</span>
+				</td>
 			</tr>
-			</span>
 			<tr>
-				<td colspan="7" align="center">
-					<textarea id="saveArea" cols="20" rows="8"></textarea>
+				<td colspan="5" align="center">
+					<textarea id="saveArea" cols="20" rows="4"></textarea>
 				</td>
 			</tr>
 		</center>
