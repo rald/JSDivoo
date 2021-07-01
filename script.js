@@ -249,3 +249,8 @@ function draw() {
 update(0);
 
 animationInterval=setInterval(draw,1000/60);
+
+canvas.addEventListener("touchstart", function(event) { event.preventDefault() });
+canvas.addEventListener("touchmove", function(event) { event.preventDefault() });
+canvas.addEventListener("touchend", function(event) { event.preventDefault() });
+canvas.addEventListener("touchcancel", function(event) { event.preventDefault() });
