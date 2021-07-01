@@ -83,15 +83,11 @@ function remove(arr,i) {
 }
 
 color.addEventListener("input",function(e) {
-
 	cfs=this.value;
 	hex.value=this.value;
 });
 
-hex.addEventListener("change",function(e)
-{
-
-
+hex.addEventListener("change",function(e) {
 	if (/^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(this.value)) {
 		cfs=this.value;
 		color.value=this.value;
@@ -101,46 +97,34 @@ hex.addEventListener("change",function(e)
 });
 
 prev.addEventListener("click",function(e) {
-	
-
 	if(frame>0) {
 		frame--;
 		update(frame);
 	} else {
-		if(confirm("Add frame at the beginning?")) {
-			var arr=[];
-			for (var i = 0; i < boxCols*boxRows; i++) {
-				arr.push("#000000");
-			}
-			bitmap.unshift(arr);
-			update(0);
-			alert("Frame added");
+		var arr=[];
+		for (var i = 0; i < boxCols*boxRows; i++) {
+			arr.push("#000000");
 		}
+		bitmap.unshift(arr);
+		update(0);
 	}
 });
 
 next.addEventListener("click",function(e) {
-	
-
 	if(frame<bitmap.length-1) {
 		frame++;
 		update(frame);
 	} else {
-		if (confirm("Add a new frame at end?")) {
-			var arr = [];
-			for (var i = 0; i < boxCols*boxRows; i++) {
-				arr.push("#000000");
-			}
-			bitmap.push(arr);
-			update(bitmap.length-1);
-			alert("Frame "+frame+" added");
+		var arr = [];
+		for (var i = 0; i < boxCols*boxRows; i++) {
+			arr.push("#000000");
 		}
+		bitmap.push(arr);
+		update(bitmap.length-1);
 	}
 });
 
 minus.addEventListener("click",function(e) {
-	
-
 	if(bitmap.length>1) {
 		if(confirm("Remove frame "+frame+"?")) {
 			remove(bitmap,frame);
@@ -155,48 +139,43 @@ minus.addEventListener("click",function(e) {
 });
 
 add.addEventListener("click",function(e) {
-	
-	
-	if(confirm("Insert a frame before frame "+frame+"?")) {
-		var arr=[];
-		for (var i = 0; i < boxCols*boxRows; i++) {
-			arr.push("#000000");
-		}
-		insert(bitmap,frame,arr);
-		update(frame);
-		alert("Frame "+frame+" inserted");
+	var arr=[];
+	for (var i = 0; i < boxCols*boxRows; i++) {
+		arr.push("#000000");
 	}
+	insert(bitmap,frame,arr);
+	update(frame);
 });
 
 btnPlay.addEventListener("click",function(e) {
-		playing=true;
-		
-		var controls = document.getElementsByClassName("controls");
-		
-		for (var i = 0; i < controls.length; i++) {
-			var nodes=controls[i].getElementsByTagName("*");
-			for(var j=0;j<nodes.length;j++) {
-				nodes[j].disabled = true;
-			}
+	playing=true;
+	
+	var controls = document.getElementsByClassName("controls");
+	
+	for (var i = 0; i < controls.length; i++) {
+		var nodes=controls[i].getElementsByTagName("*");
+		for(var j=0;j<nodes.length;j++) {
+			nodes[j].disabled = true;
 		}
-		
-		clearInterval(animationInterval);
-		animationInterval=setInterval(animate,500);
+	}
+	
+	clearInterval(animationInterval);
+	animationInterval=setInterval(animate,500);
 });
 
 btnPause.addEventListener("click",function(e) {
-		playing=false;
-			
-		var controls = document.getElementsByClassName("controls");
-		for (var i = 0; i < controls.length; i++) {
-			var nodes=controls[i].getElementsByTagName("*");
-			for(var j=0;j<nodes.length;j++) {
-				nodes[j].disabled = false;
-			}
+	playing=false;
+		
+	var controls = document.getElementsByClassName("controls");
+	for (var i = 0; i < controls.length; i++) {
+		var nodes=controls[i].getElementsByTagName("*");
+		for(var j=0;j<nodes.length;j++) {
+			nodes[j].disabled = false;
 		}
-	
-		clearInterval(animationInterval);
-		animationInterval=setInterval(draw,1000/60);
+	}
+
+	clearInterval(animationInterval);
+	animationInterval=setInterval(draw,1000/60);
 });
 
 frameNumber.addEventListener("change",function(e) {
@@ -214,14 +193,11 @@ for(var i=0;i<controls.length;i++) {
 }
 
 btnSave.addEventListener("click",function(e) {
-	
-
 	saveArea.value=JSON.stringify(bitmap);
 	
 	saveArea.select();
 	saveArea.setSelectionRange(0,99999);
 	document.execCommand("copy");
-
 });
 
 btnLoad.addEventListener("click", function(e) {
@@ -231,12 +207,12 @@ btnLoad.addEventListener("click", function(e) {
 
 
 function animate() {
-		if (frame < bitmap.length-1) {
-			frame++;
-		} else {
-			frame = 0;
-		}
-		update(frame);
+	if (frame < bitmap.length-1) {
+		frame++;
+	} else {
+		frame = 0;
+	}
+	update(frame);
 }
 
 
@@ -247,8 +223,6 @@ function draw() {
 		bitmap[frame][i+j*boxCols]=cfs;
 		box(i*boxWidth,j*boxHeight,boxWidth,boxHeight,cfs,css);
 	}
-	
-	
 }
 
 update(0);
