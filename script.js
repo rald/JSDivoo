@@ -24,6 +24,7 @@ var saveArea=document.getElementById("saveArea");
 
 var btnEyedrop=document.getElementById("btnEyedrop");
 
+var btnFill=document.getElementById("btnFill");
 
 var ctx=canvas.getContext("2d");
 
@@ -32,6 +33,7 @@ var css="#C0C0C0";
 
 var playing=false;
 var eyedropping=false;
+var filling=false;
 var hold=false;
 
 canvas.width=256;
@@ -190,6 +192,7 @@ btnPlay.addEventListener("click",function(e) {
 btnPause.addEventListener("click",function(e) {
 	
 	if(eyedropping) return false;
+	if(filling) return false;
 	
 	playing=false;
 	
@@ -221,6 +224,7 @@ btnLoad.addEventListener("click", function(e) {
 btnEyedrop.addEventListener("click", function(e) {
 	
 	if(playing) return false;
+	if(filling) return false;
 
 	if(eyedropping) {
 			enableControls();
@@ -243,6 +247,35 @@ btnEyedrop.addEventListener("click", function(e) {
 	clearInterval(animationInterval);
 	animationInterval = setInterval(eyedropColor, 1000/60);
 });
+
+btnFill.addEventListener("click", function(e) {
+	
+	if(playing) return false;
+	if(eyedropping) return false;
+
+	if(filling) {
+			enableControls();
+		
+			clearInterval(animationInterval);
+			animationInterval = setInterval(draw, 1000 / 60);
+		
+			btnFill.style.border = "1px solid transparent";
+		
+			filling = false;
+		
+		return false;
+	}
+
+	filling=true;
+
+	btnFill.style.border="1px solid black";
+
+	disableControls();
+	
+	clearInterval(animationInterval);
+	animationInterval = setInterval(fillColor, 1000/60);
+});
+
 
 function animate() {
 	if (frame < bitmap.length-1) {
@@ -269,6 +302,47 @@ function eyedropColor() {
 			eyedropping = false;
 		}	
 }
+
+function floodFillUtil(x,y,c1,c2) {
+	if(x<0 || x>=boxCols || y<0 || y>=boxRows) return;
+	var c3=bitmap[frame][x+y*boxCols];
+	if(c2==c3) {
+		bitmap[frame][x+y*boxCols]=c1;
+		floodFillUtil(x,y-1,c1,c2);
+		floodFillUtil(x,y+1,c1,c2);
+		floodFillUtil(x-1,y,c1,c2);
+		floodFillUtil(x+1,y,c1,c2);
+	}
+}
+
+function floodFill(x,y) {
+	var c1=cfs;
+	var c2=bitmap[frame][x+y*boxCols];
+	if(c1!=c2) {
+		floodFillUtil(x,y,c1,c2);
+	}
+	update(frame);
+}
+
+function fillColor() {
+		if (isMouseDown) {
+			
+			var i = Math.floor(mousePos.x / boxWidth);
+			var j = Math.floor(mousePos.y / boxHeight);
+		
+			floodFill(i,j);
+		
+			enableControls();
+			
+			clearInterval(animationInterval);
+			animationInterval = setInterval(draw, 1000 / 60);		
+			
+			btnFill.style.border="1px solid transparent";
+
+			filling = false;
+		}	
+}
+
 
 function draw() {
 	if(drawing) {
