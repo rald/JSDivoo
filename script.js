@@ -26,6 +26,10 @@ var btnEyedrop=document.getElementById("btnEyedrop");
 
 var btnFill=document.getElementById("btnFill");
 
+var btnGIF=document.getElementById("btnGIF");
+
+var output=document.getElementById("output");
+
 var ctx=canvas.getContext("2d");
 
 var cfs="#ffffff";
@@ -276,6 +280,38 @@ btnFill.addEventListener("click", function(e) {
 	animationInterval = setInterval(fillColor, 1000/60);
 });
 
+btnGIF.addEventListener("click", function(e) {
+	
+	var gif = new GIF({
+		workers: 2,
+		quality: 10
+	});
+	
+	var cvss=[];
+	for(var k=0;k<bitmap.length;k++) {
+		var cvsx=document.createElement("canvas");
+		cvsx.width=canvas.width;
+		cvsx.height=canvas.height;
+		var ctxx=cvsx.getContext("2d");
+		for(var j=0;j<boxRows;j++) {
+			for(var i=0;i<boxCols;i++) {
+				ctxx.fillStyle=bitmap[k][i+j*boxCols];
+				ctxx.fillRect(i*boxWidth,j*boxHeight,boxWidth,boxHeight);
+			}
+		}
+		gif.addFrame(cvsx);
+	}
+	
+	gif.on('finished', function(blob) {
+		var img=document.createElement("img");
+		img.src=URL.createObjectURL(blob);
+		output.innerHTML="";
+		output.appendChild(img);
+	});
+	
+	gif.render();
+	
+});
 
 function animate() {
 	if (frame < bitmap.length-1) {
